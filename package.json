@@ -1,0 +1,30 @@
+{
+  "name": "fragments-ui",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A web app to manage `fragments` authentication and test back-end",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devils2ndself/fragments-ui.git"
+  },
+  "keywords": [],
+  "author": "Artem Tanyhin",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/devils2ndself/fragments-ui/issues"
+  },
+  "homepage": "https://github.com/devils2ndself/fragments-ui#readme",
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1"
+  },
+  "dependencies": {
+    "aws-amplify": "^4.3.35"
+  }
+}
