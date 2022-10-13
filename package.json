@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "description": "A web app to manage `fragments` authentication and test back-end",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
