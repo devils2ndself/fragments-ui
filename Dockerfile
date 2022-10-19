@@ -29,3 +29,6 @@ COPY --from=builder /fragments-ui/dist /usr/share/nginx/html/
 
 # Open port 80
 EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=3 \
+    CMD curl --fail localhost || exit 1
