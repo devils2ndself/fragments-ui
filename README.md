@@ -13,6 +13,6 @@ Run `npm start` in order to start the development server using Parcel at `localh
 
 - `docker build -t fragments-ui:alpine` - build the image (requires ~30mb of disk space)
 
-- `docker run -d --rm -p 8080:80 fragments-ui:alpine` - run container in background
+- `docker run [-d | -it] --init --rm -p 1234:80 fragments-ui:alpine` - run container in background (`-d` for running in background, `-it` for interactive shell)
 
 - `docker kill <sha>` - stop the container
