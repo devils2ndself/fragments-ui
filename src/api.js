@@ -36,9 +36,9 @@ export async function postTextFragment(user) {
       method: 'POST',
       headers: {
         ...user.authorizationHeaders(),
-        'Content-Type': 'text/plain'
+        'Content-Type': document.getElementById('type').value
       },
-      body: Buffer.from('Test')
+      body: Buffer.from(document.getElementById('content').value)
     });
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`);

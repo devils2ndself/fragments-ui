@@ -9,11 +9,23 @@
   <body>
     <h1>Fragments UI</h1>
     <section>
-      <nav><button id="login">Login</button> <button id="logout">Logout</button></nav>
+      <nav>
+        <button id="login">Login</button> 
+        <button id="logout">Logout</button>
+      </nav>
     </section>
     <section hidden id="user">
       <h2>Hello <span class="username"></span>!</h2>
-      <nav><button id="post">Post New Fragment</button></nav>
+      <div>
+        <button id="post">Post New Fragment</button>
+        <select id="type" style="width: 200px; float: right;">
+          <option value="text/plain">text/plain</option>
+          <option value="text/markdown">text/markdown</option>
+          <option value="text/html">text/html</option>
+          <option value="application/json">application/json</option>
+        </select>
+        <textarea id="content" style="margin-top: 1em;"></textarea>
+      </div>
       <h4>User fragments:</h4>
       <p id="fragments"></p>
     </section>

@@ -11,8 +11,8 @@ Run `npm start` in order to start the development server using Parcel at `localh
 
 ## Docker
 
-- `docker build -t fragments-ui:alpine` - build the image (requires ~30mb of disk space)
+- `docker build -t devils2ndself/fragments-ui:alpine -t devils2ndself/fragments-ui:latest .` - build the image (requires ~30mb of disk space)
 
-- `docker run [-d | -it] --init --rm -p 1234:80 fragments-ui:alpine` - run container in background (`-d` for running in background, `-it` for interactive shell)
+- `docker run [-d | -it] --init --rm -p 1234:80 devils2ndself/fragments-ui:alpine` - run container in background (`-d` for running in background, `-it` for interactive shell)
 
 - `docker kill <sha>` - stop the container
