@@ -1,9 +1,12 @@
 import { Auth, getUser } from './auth';
 import { getUserFragments, postTextFragment } from './api';
 
+let user;
+let userSection;
+
 async function init() {
   // Get our UI elements
-  const userSection = document.querySelector('#user');
+  userSection = document.querySelector('#user');
   const loginBtn = document.querySelector('#login');
   const logoutBtn = document.querySelector('#logout');
   const postBtn = document.querySelector('#post');
@@ -21,7 +24,7 @@ async function init() {
   };
 
   // See if we're signed in (i.e., we'll have a `user` object)
-  const user = await getUser();
+  user = await getUser();
   if (!user) {
     // Disable the Logout button
     logoutBtn.disabled = true;
@@ -42,11 +45,15 @@ async function init() {
 
   postBtn.onclick = async () => {
     await postTextFragment(user);
-    userSection.querySelector('#fragments').innerText = await getUserFragments(user);
   }
   
   // Do an authenticated request to the fragments API server and log the result
-  userSection.querySelector('#fragments').innerText = await getUserFragments(user);
+  await loadFragments();
+}
+
+export async function loadFragments() {
+  console.log('loading user fragments...')
+  userSection.querySelector('#fragments').innerHTML = await getUserFragments(user);
 }
 
 // Wait for the DOM to be ready, then start the app

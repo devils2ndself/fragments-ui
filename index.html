@@ -16,18 +16,15 @@
     </section>
     <section hidden id="user">
       <h2>Hello <span class="username"></span>!</h2>
-      <div>
+      <nav>
+        <div style="width: 375px; display:inline-block; margin-right: 1em;">
+          <label for="content">Select a file:</label>
+          <input type="file" id="content" name="content" >
+        </div>
         <button id="post">Post New Fragment</button>
-        <select id="type" style="width: 200px; float: right;">
-          <option value="text/plain">text/plain</option>
-          <option value="text/markdown">text/markdown</option>
-          <option value="text/html">text/html</option>
-          <option value="application/json">application/json</option>
-        </select>
-        <textarea id="content" style="margin-top: 1em;"></textarea>
-      </div>
+      </nav>
       <h4>User fragments:</h4>
-      <p id="fragments"></p>
+      <div id="fragments"></div>
     </section>
   </body>
 </html>
