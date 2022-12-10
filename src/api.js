@@ -1,11 +1,52 @@
 const apiUrl = process.env.API_URL || 'http://localhost:8080';
-import { loadFragments } from './app';
+import { loadFragments, user } from './app';
+import { getUser } from './auth';
 
-export async function deleteFragment(id) {
-  await loadFragments();
+window.deleteFragment = async function deleteFragment(id) {
+  try {
+    let user = await getUser();
+    const res = await fetch(`${apiUrl}/v1/fragments/${id}`, {
+      method: 'DELETE',
+      headers: user.authorizationHeaders()
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+    console.log('Fragment deleted:', id);
+    await loadFragments();
+    return true;
+  } catch (err) {
+    console.error('Unable to call DELETE /v1/fragment', { err });
+  }
 }
 
-export async function updateFragment(id, content) {
+window.updateFragment = async function updateFragment(id) {
+  let user = await getUser();
+  try {
+    const file = document.getElementById('file/'+id).files[0];
+    const content = await getBuffer(file);
+    let type = file.type;
+    if (file.name.endsWith('.md')) {
+      type = 'text/markdown';
+    }
+    const res = await fetch(`${apiUrl}/v1/fragments/${id}`, {
+      method: 'PUT',
+      headers: {
+        ...user.authorizationHeaders(),
+        'Content-Type': type
+      },
+      body: content
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log('Fragment posted', { data });
+    await loadFragments();
+    return true;
+  } catch (err) {
+    console.error('Unable to call POST /v1/fragment', { err });
+  }
   await loadFragments();
 }
 
@@ -20,7 +61,6 @@ function getBuffer(fileData) {
 }
 
 export async function postTextFragment(user) {
-  console.log('Posting new text/plain fragment...');
   try {
     const content = await getBuffer(document.getElementById('content').files[0]);
     let type = document.getElementById('content').files[0].type;
@@ -79,9 +119,9 @@ export async function getUserFragments(user) {
         ${el.size} bytes
         <br />
         Last updated on ${new Date(el.updated).toLocaleString()}</p>
-        <button id="put/${el.id}">Update</button>
+        <button onclick="deleteFragment('${el.id}')">Delete</button>
         <input type="file" id="file/${el.id}" name="content" style="width: 400px;">
-        <button onclick="deleteFragment('${el.id}')">Delete</button>`
+        <button onclick="updateFragment('${el.id}')">Update</button>`
         return row;
       })
     )
